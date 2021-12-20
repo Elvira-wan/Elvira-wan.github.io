@@ -42,7 +42,7 @@
 
 4. 事件绑定大小写改变：`onclick = "demo()" => onClick = {demo}`
 
-5. 内联样式，要用 `style={{key: value}}` 的形式去写，外层括号表示其中要书写js语句，内层括号表示是一个对象；
+5. 内联样式，要用 `style=key:value}}` 的形式去写，外层括号表示其中要书写js语句,内层括号表示是一个对象；
 
 6. 不能有多个根标签；
 
@@ -469,7 +469,7 @@
 
 - 旧版本的生命周期图
 
-![image-20210622171412184](../images/image-20210622171412184.png)
+![image-20210622171412184](image-20210622171412184.png)
 
 
 
@@ -673,7 +673,7 @@ class B extends React.Component {
 
 - 新版本生命周期图：
 
-  ![image-20210623123048848](../images/image-20210623123048848.png)
+  ![image-20210623123048848](image-20210623123048848.png)
 
   
 
@@ -935,7 +935,7 @@ class B extends React.Component {
 
      一般组件：`<Demo/>`
 
-     路由组件：`<Route path='/demo' component={Demo}/>`
+     路由组件：`<Route path='/demo' component={Demo} />`
 
   2. 存放位置不同：
 
@@ -965,7 +965,7 @@ class B extends React.Component {
 
 - switch 的使用：
 
-  >用于注册路由时，一个路径匹配多个组件，为了提高效率，引入 `<Switch />` 组件将 `<Link />` 包裹起来，此时如果再出现一个路径匹配多个路由的状况，则只读取展示第一个组件；
+  >用于注册路由时，一个路径匹配多个组件，为了提高效率，引入 `<Switch>` 组件将 `<Link>` 包裹起来，此时如果再出现一个路径匹配多个路由的状况，则只读取展示第一个组件；
 
 
 
@@ -993,11 +993,11 @@ class B extends React.Component {
 
   
 
-- `<Redirect />` 组件：
+- `<Redirect>` 组件：
 
   >相当于给页面定一个主页，即一开始就显示的页面；
 
-  写法：`<Redirect to='/pathName'/>`
+  写法：`<Redirect to='/pathName'>`
 
   一般写在所有路由的最后，作为兜底；
 
@@ -1142,7 +1142,7 @@ class B extends React.Component {
 
   工作流程原理图：
 
-  ![image-20210716222914388](../images/image-20210716222914388.png)
+  ![image-20210716222914388](image-20210716222914388.png)
 
   三大核心概念：
 
@@ -1220,7 +1220,7 @@ class B extends React.Component {
 
   - 解决方法二：
 
-    在 `render <APP/>` 时，通过在 `store.subscribe()` 中书写回调函数的方式来促进页面重新渲染，该方法会监测store中状态的改变，一旦发生改变则重新渲染<App/>；
+    在 `render <APP/>` 时，通过在 `store.subscribe()` 中书写回调函数的方式来促进页面重新渲染，该方法会监测store中状态的改变，一旦发生改变则重新渲染 `<App/>`；
     		
 
   异步 `action`：运用在需要异步请求，但是又不想在组件中书写请求的情况下
@@ -1270,7 +1270,7 @@ class B extends React.Component {
 
   - 容器组件 和 UI组件 整合一个文件
 
-  - 无需在 `<APP></App>` 中通过 Props给一个个的容器组件传递 `store`，给 `<App></App>` 包裹一个 `<Provider store={store}/>` 即可。
+  - 无需在 `<APP>` 中通过 Props给一个个的容器组件传递 `store`，给 `<App/>` 包裹一个 `<Provider store={store}>` 即可。
 
   - 不用再使用 `subscribe()` 检测redux中状态的改变，容器组件自动监测；
 
@@ -1310,7 +1310,7 @@ class B extends React.Component {
   >
   >- 不能调用Date.now()或者Math.random()等不纯的方法 ，因为以上两个方法会使每次输出结果不相同；
   >
-  >  
+  >
   >
   >redux 的 reducer 必须是一个纯函数；
 
@@ -1334,19 +1334,19 @@ class B extends React.Component {
   - `setState` 更新状态的两种写法：
 
     - `setState(stateChange, [callback])` ------ 对象式的setState：
-      
+
       1. `stateChange` 为状态改变对象(该对象可以体现出状态的更改)；
       2. `callback` 是可选的回调函数, 它在状态更新完毕、界面也更新后(render调用后)才被调用；
-      
+
     - `setState(updater, [callback])` ------ 函数式的setState：
 
-         1. `updater` 为返回 `stateChange` 对象的函数。
+      1. `updater` 为返回 `stateChange` 对象的函数。
 
-         2. `updater` 可以接收到 `state` 和 `props`。
+      2. `updater` 可以接收到 `state` 和 `props`。
 
-         3. `callback` 与上相同；
+      3. `callback` 与上相同；
 
-            
+         
 
     >总结：对象式的setState是函数式的setState的简写方式(语法糖)
     >
@@ -1371,7 +1371,7 @@ class B extends React.Component {
 
       第二种写法需要在 `react` 库中引入 `lazy`；
 
-    - 通过 `<Suspense />` 指定在加载得到路由打包文件前显示一个自定义loading界面
+    - 通过 `<Suspense>` 指定在加载得到路由打包文件前显示一个自定义loading界面
 
       ````jsx
       import {Suspense} from 'react'
@@ -1429,10 +1429,10 @@ class B extends React.Component {
       >
       >````jsx
       >React.useEffect(() => { 
-      >    // 在此可以执行任何带副作用操作
-      >    return () => { // 在组件卸载前执行
-      >        // 在此做一些收尾工作, 比如清除定时器/取消订阅等
-      >    }
+      >   // 在此可以执行任何带副作用操作
+      >   return () => { // 在组件卸载前执行
+      >       // 在此做一些收尾工作, 比如清除定时器/取消订阅等
+      >   }
       >}, [stateValue]) // 如果指定的是[], 回调函数只会在第一次render()后执行
       >````
       >
@@ -1449,9 +1449,9 @@ class B extends React.Component {
 
       > Ref Hook可以在函数组件中存储/查找组件内的标签或任意其它数据
       >
-      >语法：`const refContainer = useRef()`
+      > 语法：`const refContainer = useRef()`
       >
-      >作用：保存标签对象,功能与React.createRef()一样
+      > 作用：保存标签对象,功能与React.createRef()一样
 
       
 
@@ -1594,5 +1594,3 @@ class B extends React.Component {
         console.log(error, info);
     }
     ````
-
-    

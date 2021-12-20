@@ -45,7 +45,7 @@ module.exports = {
         sidebar: {
             // docs文件夹下面的accumulate文件夹 文档中md文件 书写的位置(命名随意)
             '/accumulate/': [
-                '/accumulate/', // accumulate文件夹的README.md 不是下拉框形式
+                // '/accumulate/', // accumulate文件夹的README.md 不是下拉框形式
                 // 若想将页面的标题设置为其他文字也可以使用一个数组定义
                 // ['/path', 'tltle']
                 {
@@ -81,6 +81,12 @@ module.exports = {
                     children: [
                         '/accumulate/frame/react',
                         '/accumulate/frame/vue',
+                    ]
+                },
+                {
+                    title: '进阶部分',
+                    children: [
+                        '/accumulate/advanced/typeScript',
                     ]
                 }
             ],

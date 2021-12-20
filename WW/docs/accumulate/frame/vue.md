@@ -55,45 +55,45 @@
 >
 > ````js
 > const person = {
->  name: 'WW.',
->  sex: 'female'
+> name: 'WW.',
+> sex: 'female'
 > }
 > 
 > let number = 18;
 > 
 > // 该方法接收三个参数(对象名，对象值，属性值(配置对象))
 > Object.defineProperty(person, 'age',  {
->  // value: 18,
+> // value: 18,
 > 
->  // 控制属性是否可枚举，默认false
->  enumerable: true,
->  // 控制属性是否可改变，默认false
->  writable: true,
->  // 控制属性是否可删，默认false
->  configurable: true
+> // 控制属性是否可枚举，默认false
+> enumerable: true,
+> // 控制属性是否可改变，默认false
+> writable: true,
+> // 控制属性是否可删，默认false
+> configurable: true
 > 
->  // 当该属性被读取时，get函数(getter)会被自动调用，且返回值就是该属性的值
->  get: function() {
->  	// 每一次访问age都会触发getter的调用
->  	// 因此就实现了age是一个可以根据外部动态可变的
->  	// 若书写该方法就不能写value和writable否则b如下错
+> // 当该属性被读取时，get函数(getter)会被自动调用，且返回值就是该属性的值
+> get: function() {
+> 	// 每一次访问age都会触发getter的调用
+> 	// 因此就实现了age是一个可以根据外部动态可变的
+> 	// 若书写该方法就不能写value和writable否则b如下错
 > 		// Uncaught TypeError: Invalid property descriptor. Cannot both specify accessors and a value or writable attribute, #<Object> 
->  	return number;
+> 	return number;
 > 	}
 > 
 > 	// get 和 set可以进行如下简写
 > 	// 当通过 person.age 修改该属性时，set函数(setter)就会被调用，且会收到修改的具体值
 > 	set(value) {
->      console.log(value);
->      // 但由于此时age还是通过get函数获取的
->      // 因此再次读取age值时，并没有改变，所以进行如下操作:
+>   console.log(value);
+>   // 但由于此时age还是通过get函数获取的
+>   // 因此再次读取age值时，并没有改变，所以进行如下操作:
 > 		number = value;
->      // 这样就实现了双向数据绑定，改变一个另一个也改变
->  }
+>   // 这样就实现了双向数据绑定，改变一个另一个也改变
+> }
 > })
 > ````
-> 
->**注意**：使用该方法定义的属性是不可枚举的，且不可变，不可删的；
+>
+> **注意**：使用该方法定义的属性是不可枚举的，且不可变，不可删的；
 
 ![image-20211117174148000](../images/image-20211117174148000.png)
 
@@ -111,7 +111,7 @@
 >
 > 若既想要穿参数又想要接收 `event` ，则可以在参数列表中使用 `$event` 接收时间对象；
 >
->  **注意**：该函数一定要写为普通函数，否则this的指向会出错；
+> **注意**：该函数一定要写为普通函数，否则this的指向会出错；
 >
 > 
 >
@@ -172,7 +172,7 @@
 >
 > 
 >
-> -  利用 `methods` 中书写的方法
+> - 利用 `methods` 中书写的方法
 >
 >   ````js
 >   new Vue({
@@ -210,7 +210,7 @@
 >     fullName2() {
 >       return this.firstName.slice(0, 3) + ' - ' + this.secondName.slice(0, 3);
 >     }
->         
+>     
 >    }
 >   ````
 >
@@ -317,7 +317,7 @@ new Vue({
 
 > `v-show` ：属性值为布尔值，相较于 `v-if` 只是隐藏节点，不是将DOM彻底删除，对DOM操作较多时更适合用该语法；
 >
->  `v-if `：属性值为布尔值，可与 `v-else-if/v-else` 组合使用，将DOM彻底删除，适用于同时操作一组DOM 或者 对DOM操作不多的情况；
+> `v-if `：属性值为布尔值，可与 `v-else-if/v-else` 组合使用，将DOM彻底删除，适用于同时操作一组DOM 或者 对DOM操作不多的情况；
 
 
 
@@ -341,13 +341,22 @@ new Vue({
 
 #### 列表渲染
 
-> 当页面要根据 data 中数组/对象，渲染页面的话就会使用到 `v-for="item in/of arr"` 
->
-> 如：`<li v-for="item for arr" :key="item.id">{{item.name}} + '-' {{item.age}}</li>`
->
-> `key` 形同 React 的 `key` 是用来对比DOM的唯一标识；
->
-> 若不写 `:key` 则会自动将 `index` 作为 `key`；
+````vue
+<template>
+<!-- 
+ 当页面要根据 data 中数组/对象，渲染页面的话就会使用到 `v-for="item in/of arr"` 
+
+ `key` 形同 React 的 `key` 是用来对比DOM的唯一标识；
+
+ 若不写 `:key` 则会自动将 `index` 作为 `key`；
+
+	如：
+-->
+<li v-for="item for arr" :key="item.id">
+  {{item.name}} + '-' {{item.age}}
+</li>
+</template>
+````
 
 
 
@@ -442,7 +451,7 @@ new Vue({
 
 - `v-text`：形同插值语法，写在标签属性中，将所有内容当成字符串解析，无法解析html；
 - `v-html`：如上，但可解析html，但是其有**严重的安全性问题**，在网站上动态渲染任意的HTML是极其危险的，容易导致XSS攻击，因此一定要在可信用户上使用 `v-html`，且永远不在提交内容上使用 `；
-- `v-cloak`：没有值，本质是一个特殊属性，Vue实例创建完毕并接管容器后，会删除 `v-cloak` 属性，使用 css `[v-cloak] {display: none}` + `<div v-cloak></div>` 可解决页面因网速慢而显示出 {{}} 模版字符串的问题；
+- `v-cloak`：没有值，本质是一个特殊属性，Vue实例创建完毕并接管容器后，会删除 `v-cloak` 属性，使用 css `[v-cloak] {display: none}` + `<div v-cloak> </div>` 可解决页面因网速慢而显示出 {{}} 模版字符串的问题；
 - `v-once`：没有值，且在初次动态渲染后就被视为静态内容了；
 - `v-pre`：没有值，Vue会跳过该属性所在节点的编译过程，可利用其跳过没有指令语法，也没有插值语法的节点，加快编译过程；
 
